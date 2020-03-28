@@ -8,7 +8,7 @@ public static void main(String args[]){
   }
 }
 
-用class定义了一个类，类是Java的基本封装单元，public表示为公共类，只能有一个公共类，该类为主类。
+分析：用class定义了一个类，类是Java的基本封装单元，public表示为公共类，只能有一个公共类，该类为主类。
 {}main()方法：一个程序中只能有一个main()方法，为该程序的执行入口，且必须由public static void main(Sting args[])语句来定义。
 public表示为公共方法；static表示为静态方法，属于类的方法，可通过类名直接调用；void表示此方法没有返回值;String args[]是main()方法传递的参数。
 #2 
@@ -87,3 +87,33 @@ if(条件1){                          从多个分支中选择一个来执行
  
  #9
  类与对象(Object Oriented OO)
+ 格式：类的修饰符 class 类名 [extends 父类名]{
+      成员变量的定义；
+      成员方法的定义；
+ } 
+ 补充：成员变量的属性是private时，成员方法用get---set方法
+ 示例：{
+       private double x;
+       private double y;
+       ...
+       }
+       pbulic double getX(){    //获取圆心坐标
+              return x;
+       }
+       public void setX(double x1){   //设置圆心的坐标
+              x=x1;
+       }
+ 构造方法和对象初始化：在申明一个对象引用后，要用new运算符（如 Circle circle1=new Circle();）为新对象分配空间，其实就是要调用构造方法，在java中，使用构造方法是生成实例对象的唯一方法。
+ 示意：public class Xyz{
+            private int x;
+            public Xyz(){    //带一个参数的构造方法
+                  x=i;
+            }
+ }
+ 构造方法的调用：Xyz xyz1=new Xyz(3);
+ 构造方法的重载：一个类可以有多个不同参数列表的构造方法，可以用关键词this来指代本类中的其他构造方法。
+ 示例：public Circle1(int a1,int b1,int c1){
+            a=a1;
+            ...
+ }
+ 面向对象三大特征：1 封装：类是封装的基本单元
