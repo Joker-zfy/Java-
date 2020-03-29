@@ -117,3 +117,111 @@ if(条件1){                          从多个分支中选择一个来执行
             ...
  }
  面向对象三大特征：1 封装：类是封装的基本单元
+使用private修饰的属性和方法只能在本类中被访问，get()set()方法就是为了封装而设计的。
+    2  继承：子类可以继承父类的属性和方法，从而简化程序设计。
+结构：   编写父类
+        class Pet{
+         //属性和方法为public公共
+}       
+         编写子类
+        class Dog extends Pet{
+        //子类特有的属性和方法
+}
+        class Cat extends Pet{
+}
+说明：//子类继承了父类的非私有的属性和方法
+      //在java中父类可以被多个子类继承，而子类只可以继承自一个父类（python中子类可以继承自多个父类）
+      //当子类中有方法和主类同名时，子类优先，成为方法重写（或者方法复写）。
+//三种情况下没法继承：1 父类属性为private(私有) 2 子类和父类不在同一个包中（可以通过导包来解决） 3 构造方法（父类中的无参构造方法可以被继承）
+补充：四种修饰符：public(所有) private(本类) 默认（friendly)(本类和同包) protected(本类 同包 子包)
+关键字：super----子类访问父类成员（构造方法，属性，方法等）
+调用构造方法时，需要卸载构造方法里面的第一句，如：
+          public Dog(Stiring name,String color,int age){
+               super(name,color,age);  
+}
+//也可以把子类自己的属性加进去，如：
+ String strain;
+ public Dog(Stiring name,String color,int age,String strain){
+               super(name,color,age);
+               this.strain=strain;
+调用方法和属性时。用super.属性和super.方法即可
+       final-------可以修饰类、方法、变量（类不能被继承，方法不可以被子类重写，变量值不可以改变）
+final写在修饰符前面，如final public class Pet(){};final double pai=3.1415926;
+3  多态：同一个引用类型，使用不同的示例而执行不同的操作。
+使用多态的条件:编写具有继承关系的父类和子类；子类重写父类方法；父类引用指向子类的对象。
+示例：
+package com.duotai;
+public class Master {
+    //pet可以是Pet子类的实例
+    public void feed(Pet pet){
+        System.out.println("开始喂食");
+        pet.eat();
+    }
+}
+//Cat、Dog为子类（其中有eat方法）Pet为主类（其中也有eat方法，但主类为抽象类，eat方法也为抽象方法）
+public class Test {
+    public static void main(String[] args) {
+        Master master=new Master();
+        Cat cat=new Cat();
+        Dog dog=new Dog();//向上转型（自动的）
+
+        master.feed(dog);
+
+    }
+}
+
+
+#10 
+类的扩展
+Object类（所有类的最终父类） public class Pet extends Object{};
+其中的.equals()方法与==意义相同
+抽象类：java中使用abstract抽象类，来限制实例化（如限制父类实例化）
+示例： public abstract class Pet{};
+//抽象类中有普通方法也有抽象方法，抽象方法一般不用在构造方法中，抽象类中的抽象方法，子类必须实现（即重写，除非子类也是抽象类）
+//为继承而生
+接口类：解决无法多继承的问题（interface 只能修饰类）
+结构： public interface MyInterFace{
+       public viod foo();   //所有方法都是 public abstract
+}；
+//接口不可以被实例化
+//接口类必须实现接口类的所有方法，即所有方法都是 public abstract
+//一个类可以实现多个接口
+//接口类的变量都是静态变量
+//没有构造方法
+结构：首先编写一个Interface类，如
+package com.jiekou;
+public interface Mp3 {
+    String discrib="这是一个Mp3接口";
+    public abstract void playMusic();
+}
+再构造一个Cellphone类来实现这个接口类，如
+package com.jiekou;
+public class CellPhone extends Phone implements Mp3 {
+    @Override
+    public void playMusic() {
+        System.out.println("开始播放音乐");
+    }
+
+    @Override
+    public void call() {
+        System.out.println("开始打电话");
+    }
+}
+再构造一个CellPhone来继承的父类Phone类，如
+package com.jiekou;
+public  abstract class Phone {
+    public abstract void call();
+}
+最后构造一个测试类，如
+package com.jiekou;
+public class Test {
+    public static void main(String[] args) {
+    CellPhone cp=new CellPhone();
+    cp.playMusic();
+    cp.call();
+    }
+}
+描述：接口表示一种能力，这体现在接口的方法上。面向接口编程时，关心实现类有何能力，而不关心实现细节；面向接口的约定而不关心接口的具体实现。
+多接口的实现：在原有类的基础上，构造额外的接口类，在接口类的实现类中添加接口类，如：public class CellPhone extends Phone implements Mp3,Map,Wallet{}；
+再添加新的接口类中的方法即可。
+
