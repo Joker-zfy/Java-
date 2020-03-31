@@ -224,4 +224,78 @@ public class Test {
 描述：接口表示一种能力，这体现在接口的方法上。面向接口编程时，关心实现类有何能力，而不关心实现细节；面向接口的约定而不关心接口的具体实现。
 多接口的实现：在原有类的基础上，构造额外的接口类，在接口类的实现类中添加接口类，如：public class CellPhone extends Phone implements Mp3,Map,Wallet{}；
 再添加新的接口类中的方法即可。
+#11
+异常处理以及程序调试
+package com.yichang;
+
+//已知可能出现异常的代码段，即无需抛出异常
+public class Test1 {
+    public static void main(String[] args) {
+        int[] array1={12,31,32,4,4,3434,43,0,32,4,43,5};
+        for(int x:array1){
+            try{   //不会出现异常的代码
+                int y=100/x;
+                System.out.println(".......");
+            }catch (Exception e){
+                System.out.println("出现异常");
+                e.printStackTrace();
+                System.exit(1);//手动退出
+            }finally {//无论是否有异常，都会执行的代码,除非手动退出
+                System.out.println("本次循环执行结束");
+            }
+        }
+
+
+
+
+    }
+}
+---------------------------------------
+package com.yichang;
+//未知可能出现异常的代码段，即需要抛出异常
+public class Test2 {
+    public static void function1(int i) throws Exception{
+        //可能出现异常的代码段
+        int y=100/i;
+        System.out.println("100除以"+i+"结果是"+y);
+    }
+    public static void main(String[] args) {
+        int[] array1={12,31,32,4,4,3434,43,0,32,4,43,5};
+        for(int x:array1){
+            try {
+                function1(x);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+}
+-------------------------------
+package com.yichang;
+
+import java.util.Scanner;
+
+//自定义异常
+public class Test3 {
+    public static void main(String[] args)  {
+        Scanner s=new Scanner(System.in);
+        System.out.println("请输入你的密码（长度必须为6位：）");
+        String psw=s.next();
+
+        if(psw.length()==6){
+            System.out.println("密码设置成功");
+        }else {
+            System.out.println("密码设置失败");
+            try {
+                throw new Exception("密码必须为6位"); //这就是自定义异常，括号中是我们定义的错误提示信息
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+}
 
