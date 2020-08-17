@@ -9,7 +9,7 @@ public static void main(String args[]){
 }
 
 分析：用class定义了一个类，类是Java的基本封装单元，public表示为公共类，只能有一个公共类，该类为主类。
-{}main()方法：一个程序中只能有一个main()方法，为该程序的执行入口，且必须由public static void main(Sting args[])语句来定义。
+{}main()方法：一个程序中只能有一个main()方法，为该程序的执行入口，且必须由public static void main(String args[])语句来定义。
 public表示为公共方法；static表示为静态方法，属于类的方法，可通过类名直接调用；void表示此方法没有返回值;String args[]是main()方法传递的参数。
 #2 
 编译源程序：cmd进入DOS命令窗口，输入：
